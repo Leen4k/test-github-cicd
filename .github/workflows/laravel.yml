@@ -34,3 +34,21 @@ jobs: #stages or job
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+    - name: Send mail
+  if: failure()
+  uses: dawidd6/action-send-mail@v2
+  with:
+    # mail server settings
+    server_address: smtp.gmail.com
+    server_port: 465
+    # user credentials
+    username: 43898278de91d3
+    password: a1164dacd558bd
+    # email subject
+    subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+    # email body as text
+    body: khoch-jit
+    # comma-separated string, send email to
+    to: abc@gmail.com,xyz@gmail.com
+    # from email name
+    from: XYZ
